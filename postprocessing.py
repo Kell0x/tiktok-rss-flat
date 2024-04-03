@@ -98,7 +98,7 @@ async def check_rss():
             updated_date = datetime.fromisoformat(updated_str)
 
             if most_recent_date is None or updated_date > most_recent_date:
-                with open("last_run.txt", "w") as file:
+                with open("rss/last_update.txt", "w") as file:
                     file.write(updated_str)
         
     return messages
