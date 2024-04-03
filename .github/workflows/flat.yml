@@ -19,7 +19,7 @@ jobs:
       - name: execute py script
         env:
           MS_TOKEN: ${{ secrets.MS_TOKEN }}
-          LAST_UPDATE: ${{ secrets.LAST_UPDATE }}
+          LAST_UPDATE: ${{ vars.LAST_UPDATE }}
           TOKEN: ${{ secrets.TOKEN }}
           CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
         run: |
