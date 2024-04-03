@@ -14,19 +14,17 @@ ghPagesURL = config.ghPagesURL
 api = TikTokApi()
 
 ms_token = os.environ.get(
-    "MS_TOKEN", None
+    "MS_TOKEN"
 )
 
-last_update = os.environ.get(
-    "LAST_UPDATE", str
-)
+last_update = datetime.fromisoformat(os.environ.get("LAST_UPDATE").replace("Z", "+00:00"))
 
 token = os.environ.get(
-    "token", None
+    "token"
 )
 
 channel_id = os.environ.get(
-    "channel_id", None
+    "channel_id"
 )
 
 async def user_videos():
@@ -81,8 +79,6 @@ def check_rss():
     if response.status_code == 200:
         root = ET.fromstring(response.text)
 
-        most_recent_date = datetime.fromisoformat(last_update.replace("Z", "+00:00"))
-
         for entry in root.findall('.//{http://www.w3.org/2005/Atom}entry'):
             updated = entry.find('{http://www.w3.org/2005/Atom}updated').text
             title = entry.find('{http://www.w3.org/2005/Atom}title').text
@@ -90,7 +86,7 @@ def check_rss():
             
             date_obj = datetime.fromisoformat(updated.replace("Z", "+00:00"))
 
-            if date_obj > most_recent_date:
+            if most_recent_date is None or date_obj > most_recent_date:
                 messages.append(f"**Message from Super Earth :** \"*{str(title).split('#')[0]}*\"\n{id_.replace('tiktok.com', 'vxtiktok.com')}")
         
         for entry in root.findall('.//{http://www.w3.org/2005/Atom}entry'):
