@@ -18,7 +18,7 @@ ms_token = os.environ.get(
 )
 
 last_update = os.environ.get(
-    "LAST_UPDATE", None
+    "LAST_UPDATE", str
 )
 
 token = os.environ.get(
