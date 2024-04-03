@@ -50,7 +50,7 @@ def user_videos():
             with TikTokApi() as api:
                 api.create_sessions(ms_tokens=[ms_token], num_sessions=1, sleep_after=3, headless=False)
                 ttuser = api.user(user)
-                user_data = await ttuser.info()
+                user_data = ttuser.info()
                 print(user_data)
 
                 for video in ttuser.videos(count=10):
