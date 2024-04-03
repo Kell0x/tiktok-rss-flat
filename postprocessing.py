@@ -17,7 +17,7 @@ ms_token = os.environ.get(
     "MS_TOKEN", None
 )
 
-last_update = datetime.fromisoformat(os.environ.get("LAST_UPDATE", str).replace("Z", "+00:00"))
+last_update = datetime.fromisoformat(os.environ.get("LAST_UPDATE", str))
 
 token = os.environ.get(
     "token", str
@@ -84,7 +84,7 @@ def check_rss():
             title = entry.find('{http://www.w3.org/2005/Atom}title').text
             id_ = entry.find('{http://www.w3.org/2005/Atom}id').text
             
-            date_obj = datetime.fromisoformat(updated.replace("Z", "+00:00"))
+            date_obj = datetime.fromisoformat(updated)
 
             if most_recent_date is None or date_obj > most_recent_date:
                 messages.append(f"**Message from Super Earth :** \"*{str(title).split('#')[0]}*\"\n{id_.replace('tiktok.com', 'vxtiktok.com')}")
