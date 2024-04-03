@@ -17,14 +17,14 @@ ms_token = os.environ.get(
     "MS_TOKEN", None
 )
 
-last_update = datetime.fromisoformat(str(os.environ.get("LAST_UPDATE", None)))
+last_update = datetime.fromisoformat(str(os.environ.get("LAST_UPDATE", str)))
 
 token = os.environ.get(
-    "token", None
+    "token", str
 )
 
 channel_id = os.environ.get(
-    "channel_id", None
+    "channel_id", str
 )
 
 async def user_videos():
