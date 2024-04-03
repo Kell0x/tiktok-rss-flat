@@ -115,7 +115,8 @@ def message_post(token, channel_id, message):
         print(response.text)
 
 if __name__ == "__main__":
-    await asyncio.run(user_videos())
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(user_videos())
     messages = check_rss()
     for message in messages:
         message_post(token, channel_id, message)
