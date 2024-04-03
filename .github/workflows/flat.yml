@@ -19,7 +19,6 @@ jobs:
       - name: execute py script
         env:
           MS_TOKEN: ${{ secrets.MS_TOKEN }}
-          LAST_UPDATE: ${{ vars.LAST_UPDATE }}
           TOKEN: ${{ secrets.TOKEN }}
           CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
         run: |
@@ -36,4 +35,5 @@ jobs:
           git config user.email github-actions@github.com
           git add .
           git commit --allow-empty -m "Latest TikTok RSS"
-          git push
+          git fetch origin master
+          git push origin master
