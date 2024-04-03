@@ -29,7 +29,9 @@ channel_id = os.environ.get(
     "CHANNEL_ID", None
 )
 
-def user_videos():
+messages = []
+
+async def user_videos():
 
     with open('subscriptions.csv') as f:
         cf = csv.DictReader(f, fieldnames=['username'])
@@ -47,13 +49,13 @@ def user_videos():
             # Set the last modification time for the feed to be the most recent post, else now.
             updated=None
             
-            with TikTokApi() as api:
-                api.create_sessions(ms_tokens=[ms_token], num_sessions=1, sleep_after=3, headless=False)
+            async with TikTokApi() as api:
+                await api.create_sessions(ms_tokens=[ms_token], num_sessions=1, sleep_after=3, headless=False)
                 ttuser = api.user(user)
-                user_data = ttuser.info()
+                user_data = await ttuser.info()
                 print(user_data)
 
-                for video in ttuser.videos(count=10):
+                async for video in ttuser.videos(count=10):
                     fe = fg.add_entry()
                     link = "https://tiktok.com/@" + user + "/video/" + video.id
                     fe.id(link)
@@ -73,8 +75,7 @@ def user_videos():
                 fg.updated(updated)
                 fg.atom_file('rss/' + user + '.xml', pretty=True) # Write the RSS feed to a file
 
-def check_rss():
-    messages = []
+async def check_rss():
     url = f"https://kell0x.github.io/tiktok-rss-flat/rss/superearthupdates"
     response = requests.get(url)
     
@@ -87,7 +88,7 @@ def check_rss():
             id_ = entry.find('{http://www.w3.org/2005/Atom}id').text
             
             date_obj = datetime.fromisoformat(updated)
-            most_recent_date = datetime.fromisoformat(str(last_update))
+            most_recent_date = datetime.fromisoformat(last_update)
 
             if most_recent_date is None or date_obj > most_recent_date:
                 messages.append(f"**Message from Super Earth :** \"*{str(title).split('#')[0]}*\"\n{id_.replace('tiktok.com', 'vxtiktok.com')}")
@@ -101,7 +102,7 @@ def check_rss():
         
     return messages
 
-def message_post(token, channel_id, message):
+async def message_post(token, channel_id, message):
     url = f"https://discord.com/api/v9/channels/{channel_id}/messages"
     headers = { "Authorization": f"{token}",  }
     data = { "content": message }
@@ -114,7 +115,8 @@ def message_post(token, channel_id, message):
         print(response.text)
 
 if __name__ == "__main__":
-    user_videos()
-    messages = check_rss()
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(user_videos())
+    loop.run_until_complete(check_rss())
     for message in messages:
-        message_post(token, channel_id, message)
+        loop.run_until_complete(message_post(token, channel_id, message))
