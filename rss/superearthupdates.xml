@@ -3,15 +3,8 @@
   <id>https://www.tiktok.com/@superearthupdates</id>
   <title>superearthupdates TikTok</title>
   <updated>2024-04-02T21:12:54+00:00</updated>
-  <author>
-    <name>Conor ONeill</name>
-    <email>conor@conoroneill.com</email>
-  </author>
-  <link href="http://tiktok.com" rel="alternate"/>
   <link href="https://kell0x.github.io/tiktok-rss-flat/rss/superearthupdates.xml" rel="self"/>
   <generator uri="https://lkiesow.github.io/python-feedgen" version="1.0.0">python-feedgen</generator>
-  <logo>https://kell0x.github.io/tiktok-rss-flat/tiktok-rss.png</logo>
-  <subtitle>OK Boomer, all the latest TikToks from superearthupdates</subtitle>
   <entry>
     <id>https://tiktok.com/@superearthupdates/video/7351898761431485728</id>
     <title>Helldivers, BREAKING NEWS Draupnir is under attack! You must go spill oil! #helldivers2 #helldivers #gaming #playstation </title>
