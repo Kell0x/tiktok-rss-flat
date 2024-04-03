@@ -29,7 +29,7 @@ channel_id = os.environ.get(
     "CHANNEL_ID", None
 )
 
-async def user_videos():
+def user_videos():
 
     with open('subscriptions.csv') as f:
         cf = csv.DictReader(f, fieldnames=['username'])
@@ -47,13 +47,13 @@ async def user_videos():
             # Set the last modification time for the feed to be the most recent post, else now.
             updated=None
             
-            async with TikTokApi() as api:
-                await api.create_sessions(ms_tokens=[ms_token], num_sessions=1, sleep_after=3, headless=False)
+            with TikTokApi() as api:
+                api.create_sessions(ms_tokens=[ms_token], num_sessions=1, sleep_after=3, headless=False)
                 ttuser = api.user(user)
                 user_data = await ttuser.info()
                 print(user_data)
 
-                async for video in ttuser.videos(count=10):
+                for video in ttuser.videos(count=10):
                     fe = fg.add_entry()
                     link = "https://tiktok.com/@" + user + "/video/" + video.id
                     fe.id(link)
@@ -87,7 +87,7 @@ def check_rss():
             id_ = entry.find('{http://www.w3.org/2005/Atom}id').text
             
             date_obj = datetime.fromisoformat(updated)
-            most_recent_date = datetime.fromisoformat(last_update)
+            most_recent_date = datetime.fromisoformat(str(last_update))
 
             if most_recent_date is None or date_obj > most_recent_date:
                 messages.append(f"**Message from Super Earth :** \"*{str(title).split('#')[0]}*\"\n{id_.replace('tiktok.com', 'vxtiktok.com')}")
@@ -114,8 +114,7 @@ def message_post(token, channel_id, message):
         print(response.text)
 
 if __name__ == "__main__":
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(user_videos())
+    user_videos()
     messages = check_rss()
     for message in messages:
         message_post(token, channel_id, message)
