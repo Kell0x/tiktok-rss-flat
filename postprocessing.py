@@ -3,12 +3,10 @@ import asyncio
 import csv
 from datetime import datetime, timezone
 from feedgen.feed import FeedGenerator
-#from tiktokapipy.api import TikTokAPI
 from TikTokApi import TikTokApi
 import config
-
-# Normal GitHub Pages URL
-# ghPagesURL = "https://conoro.github.io/tiktok-rss-flat/"
+import requests
+import xml.etree.ElementTree as ET
 
 # Custom Domain
 ghPagesURL = config.ghPagesURL
@@ -17,6 +15,18 @@ api = TikTokApi()
 
 ms_token = os.environ.get(
     "MS_TOKEN", None
+)
+
+last_update = os.environ.get(
+    "LAST_UPDATE", None
+)
+
+token = os.environ.get(
+    "token", None
+)
+
+channel_id = os.environ.get(
+    "channel_id", None
 )
 
 async def user_videos():
@@ -28,14 +38,9 @@ async def user_videos():
 
             print(f'Running for user \'{user}\'')
 
-#           user = "therock"
             fg = FeedGenerator()
             fg.id('https://www.tiktok.com/@' + user)
             fg.title(user + ' TikTok')
-            fg.author( {'name':'Conor ONeill','email':'conor@conoroneill.com'} )
-            fg.link( href='http://tiktok.com', rel='alternate' )
-            fg.logo(ghPagesURL + 'tiktok-rss.png')
-            fg.subtitle('OK Boomer, all the latest TikToks from ' + user)
             fg.link( href=ghPagesURL + 'rss/' + user + '.xml', rel='self' )
             fg.language('en')
 
@@ -67,110 +72,50 @@ async def user_videos():
                         fe.description( "No Description")        
                 fg.updated(updated)
                 fg.atom_file('rss/' + user + '.xml', pretty=True) # Write the RSS feed to a file
-                    #print(video)
-                    #print(video.as_dict)
 
+def check_rss():
+    messages = []
+    url = f"https://kell0x.github.io/tiktok-rss-flat/rss/superearthupdates"
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        root = ET.fromstring(response.text)
+
+        most_recent_date = datetime.fromisoformat(last_update.replace("Z", "+00:00"))
+
+        for entry in root.findall('.//{http://www.w3.org/2005/Atom}entry'):
+            updated = entry.find('{http://www.w3.org/2005/Atom}updated').text
+            title = entry.find('{http://www.w3.org/2005/Atom}title').text
+            id_ = entry.find('{http://www.w3.org/2005/Atom}id').text
+            
+            date_obj = datetime.fromisoformat(updated.replace("Z", "+00:00"))
+
+            if date_obj > most_recent_date:
+                messages.append(f"**Message from Super Earth :** \"*{str(title).split('#')[0]}*\"\n{id_.replace('tiktok.com', 'vxtiktok.com')}")
+        
+        for entry in root.findall('.//{http://www.w3.org/2005/Atom}entry'):
+            updated_str = entry.find('{http://www.w3.org/2005/Atom}updated').text
+            updated_date = datetime.fromisoformat(updated_str)
+
+            if most_recent_date is None or updated_date > most_recent_date:
+                os.environ["LAST_UPDATE"] = updated
+        
+    return messages
+
+def message_post(token, channel_id, message):
+    url = f"https://discord.com/api/v9/channels/{channel_id}/messages"
+    headers = { "Authorization": f"{token}",  }
+    data = { "content": message }
+    response = requests.post(url, headers=headers, json=data)
+   
+    if response.status_code == 200:
+        print(f"Message sent successfully : {message}")
+    else:
+        print(f"Failed to send the message : {message}")
+        print(response.text)
 
 if __name__ == "__main__":
-    asyncio.run(user_videos())
-
-
-'''
-with open('subscriptions.csv') as f:
-    cf = csv.DictReader(f, fieldnames=['username'])
-    for row in cf:
-        user = row['username']
-
-        print(f'Running for user \'{user}\'')
-
-        fg = FeedGenerator()
-        fg.id('https://www.tiktok.com/@' + user)
-        fg.title(user + ' TikTok')
-        fg.author( {'name':'Conor ONeill','email':'conor@conoroneill.com'} )
-        fg.link( href='http://tiktok.com', rel='alternate' )
-        fg.logo(ghPagesURL + 'tiktok-rss.png')
-        fg.subtitle('OK Boomer, all the latest TikToks from ' + user)
-        fg.link( href=ghPagesURL + 'rss/' + user + '.xml', rel='self' )
-        fg.language('en')
-
-        # Set the last modification time for the feed to be the most recent post, else now.
-        updated=None
-
-        for tiktok in api.user(username=user).videos(count=count):
-            fe = fg.add_entry()
-            link = "https://tiktok.com/@" + user + "/video/" + tiktok.id
-            fe.id(link)
-            ts = datetime.fromtimestamp(tiktok.as_dict['createTime'], timezone.utc)
-            fe.published(ts)
-            fe.updated(ts)
-            updated = max(ts, updated) if updated else ts
-            fe.title(tiktok.as_dict['desc'])
-            fe.link(href=link)
-            fe.description("<img src='" + tiktok.as_dict['video']['cover'] + "' />")
-
-        fg.updated(updated)
-
-        fg.atom_file('rss/' + user + '.xml', pretty=True) # Write the RSS feed to a file
-'''
-
-'''
-def run(csvuser):
-    try:
-        fg = FeedGenerator()
-        fg.id('https://tiktok.com/@' + csvuser)
-        fg.title(csvuser + ' TikTok')
-        fg.author( {'name':'Conor ONeill','email':'conor@conoroneill.com'} )
-        fg.link( href='http://tiktok.com', rel='alternate' )
-        fg.logo(ghPagesURL + 'tiktok-rss.png')
-        fg.subtitle('OK Boomer, all the latest TikToks from ' + csvuser)
-        fg.link( href=ghPagesURL + 'rss/' + csvuser + '.xml', rel='self' )
-        fg.language('en')
-
-        # Set the last modification time for the feed to be the most recent post, else now.
-        updated=None
-
-        with TikTokAPI(navigation_retries=3, navigation_timeout=60, args=["--disable-gpu", "--single-process"]) as api:
-
-
-            tiktokuser = api.user(csvuser, video_limit=maxItems)
-            print(tiktokuser, flush=True)
-
-            for video in tiktokuser.videos:
-
-                logger.debug(video.create_time.strftime("%m/%d/%Y, %H:%M:%S") + ": " + video.desc)
-                logger.debug("URL = " + "https://tiktok.com/@" + csvuser + "/video/" + str(video.id))
-                print(video.create_time.strftime("%m/%d/%Y, %H:%M:%S") + ": " + video.desc)
-                print("URL = " + "https://tiktok.com/@" + csvuser + "/video/" + str(video.id))
-                fe = fg.add_entry()
-                link = "https://tiktok.com/@" + csvuser + "/video/" + str(video.id)
-                fe.id(link)
-                ts = video.create_time
-                logger.debug(ts)
-                fe.published(ts)
-                fe.updated(ts)
-                updated = max(ts, updated) if updated else ts
-                if video.desc:
-                    fe.title(video.desc[0:255])
-                else:
-                  fe.title("No Title")
-                fe.link(href=link)
-                # fe.description("<img src='" + tiktok.as_dict['video']['cover'] + "' />")
-                if video.desc:
-                    fe.description(video.desc)
-                else:
-                    fe.description( "No Description")
-                #print(fg.rss_str(pretty=True))
-
-        fg.updated(updated)
-        fg.atom_file('rss/' + csvuser + '.xml', pretty=True) # Write the RSS feed to a file
-    except Exception as e:
-        logger.error(f"Error: {e}")
-        pass
-
-with open('subscriptions.csv') as f:
-
-    for row in csv.DictReader(f, fieldnames=['username']):
-        print(row['username'])
-        run(row['username'])
-
-'''
+    await asyncio.run(user_videos())
+    messages = check_rss()
+    for message in messages:
+        message_post(token, channel_id, message)
