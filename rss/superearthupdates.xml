@@ -2,17 +2,9 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
   <id>https://www.tiktok.com/@superearthupdates</id>
   <title>superearthupdates TikTok</title>
-  <updated>2024-04-02T21:12:54+00:00</updated>
+  <updated>2024-04-03T18:22:13+00:00</updated>
   <link href="https://kell0x.github.io/tiktok-rss-flat/rss/superearthupdates.xml" rel="self"/>
   <generator uri="https://lkiesow.github.io/python-feedgen" version="1.0.0">python-feedgen</generator>
-  <entry>
-    <id>https://tiktok.com/@superearthupdates/video/7351898761431485728</id>
-    <title>Helldivers, BREAKING NEWS Draupnir is under attack! You must go spill oil! #helldivers2 #helldivers #gaming #playstation </title>
-    <updated>2024-03-29T21:22:08+00:00</updated>
-    <content>Helldivers, BREAKING NEWS Draupnir is under attack! You must go spill oil! #helldivers2 #helldivers #gaming #playstation </content>
-    <link href="https://tiktok.com/@superearthupdates/video/7351898761431485728"/>
-    <published>2024-03-29T21:22:08+00:00</published>
-  </entry>
   <entry>
     <id>https://tiktok.com/@superearthupdates/video/7352236586282568992</id>
     <title>Helldivers, this is your galactic update. #helldivers2 #helldivers #gaming #playstation </title>
@@ -84,5 +76,13 @@
     <content>Helldivers, new enemys are coming soon! #helldivers2 #helldivers #gaming #playstation </content>
     <link href="https://tiktok.com/@superearthupdates/video/7353380735236984097"/>
     <published>2024-04-02T21:12:54+00:00</published>
+  </entry>
+  <entry>
+    <id>https://tiktok.com/@superearthupdates/video/7353707819880795424</id>
+    <title>{{{BROADCAST INTERUPTED}}} ______________________________________#helldivers2 #helldivers #gaming #playstation #arrowhead </title>
+    <updated>2024-04-03T18:22:13+00:00</updated>
+    <content>{{{BROADCAST INTERUPTED}}} ______________________________________#helldivers2 #helldivers #gaming #playstation #arrowhead </content>
+    <link href="https://tiktok.com/@superearthupdates/video/7353707819880795424"/>
+    <published>2024-04-03T18:22:13+00:00</published>
   </entry>
 </feed>
