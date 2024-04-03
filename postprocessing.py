@@ -17,10 +17,6 @@ ms_token = os.environ.get(
     "MS_TOKEN", None
 )
 
-last_update = os.environ.get(
-    "LAST_UPDATE", None
-)
-
 token = os.environ.get(
     "TOKEN", None
 )
@@ -82,13 +78,17 @@ async def check_rss():
     if response.status_code == 200:
         root = ET.fromstring(response.text)
 
+        with open('rss/last_update.txt', 'r') as file:
+            last_update = file.readline().strip()
+            
+        most_recent_date = datetime.fromisoformat(str(last_update))
+
         for entry in root.findall('.//{http://www.w3.org/2005/Atom}entry'):
             updated = entry.find('{http://www.w3.org/2005/Atom}updated').text
             title = entry.find('{http://www.w3.org/2005/Atom}title').text
             id_ = entry.find('{http://www.w3.org/2005/Atom}id').text
             
             date_obj = datetime.fromisoformat(updated)
-            most_recent_date = datetime.fromisoformat(str(last_update))
 
             if most_recent_date is None or date_obj > most_recent_date:
                 messages.append(f"**Message from Super Earth :** \"*{str(title).split('#')[0]}*\"\n{id_.replace('tiktok.com', 'vxtiktok.com')}")
@@ -98,7 +98,8 @@ async def check_rss():
             updated_date = datetime.fromisoformat(updated_str)
 
             if most_recent_date is None or updated_date > most_recent_date:
-                os.environ["LAST_UPDATE"] = updated
+                with open("last_run.txt", "w") as file:
+                    file.write(updated_str)
         
     return messages
 
