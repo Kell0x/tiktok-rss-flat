@@ -31,8 +31,11 @@ jobs:
           python -m playwright install
           # patch venv/lib/python3.9/site-packages/TikTokApi/tiktok.py -i tiktok.py.patch
           python postprocessing.py
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add rss/*
-          git commit --allow-empty -m "Latest TikTok RSS"
-          git push
+      - name: Update resources
+        uses: test-room-7/action-update-file@v1
+        with:
+            file-path: |
+                rss/last_update.txt
+                rss/superearthupdates.xml
+            commit-msg: Update resources
+            github-token: ${{ secrets.GITHUB_TOKEN }}
