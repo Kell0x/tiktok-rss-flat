@@ -33,6 +33,6 @@ jobs:
           python postprocessing.py
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add .
+          git add *
           git commit --allow-empty -m "Latest TikTok RSS"
           git push
