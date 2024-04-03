@@ -14,17 +14,17 @@ ghPagesURL = config.ghPagesURL
 api = TikTokApi()
 
 ms_token = os.environ.get(
-    "MS_TOKEN"
+    "MS_TOKEN", None
 )
 
-last_update = datetime.fromisoformat(os.environ.get("LAST_UPDATE").replace("Z", "+00:00"))
+last_update = datetime.fromisoformat(os.environ.get("LAST_UPDATE", str).replace("Z", "+00:00"))
 
 token = os.environ.get(
-    "token"
+    "token", str
 )
 
 channel_id = os.environ.get(
-    "channel_id"
+    "channel_id", str
 )
 
 async def user_videos():
