@@ -2,17 +2,9 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
   <id>https://www.tiktok.com/@superearthupdates</id>
   <title>superearthupdates TikTok</title>
-  <updated>2024-04-04T18:09:33+00:00</updated>
+  <updated>2024-04-04T19:28:27+00:00</updated>
   <link href="https://kell0x.github.io/tiktok-rss-flat/rss/superearthupdates.xml" rel="self"/>
   <generator uri="https://lkiesow.github.io/python-feedgen" version="1.0.0">python-feedgen</generator>
-  <entry>
-    <id>https://tiktok.com/@superearthupdates/video/7352577867093429537</id>
-    <title>Helldivers, stop heading to the creek, you will cost us our major orders. #helldivers2 #helldivers #gaming #playstation </title>
-    <updated>2024-03-31T17:17:25+00:00</updated>
-    <content>Helldivers, stop heading to the creek, you will cost us our major orders. #helldivers2 #helldivers #gaming #playstation </content>
-    <link href="https://tiktok.com/@superearthupdates/video/7352577867093429537"/>
-    <published>2024-03-31T17:17:25+00:00</published>
-  </entry>
   <entry>
     <id>https://tiktok.com/@superearthupdates/video/7352674302061251872</id>
     <title>Helldivers, are the automatons heading to cyberstan?  #helldivers2 #helldivers #gaming #playstation </title>
@@ -84,5 +76,13 @@
     <content>Helldivers, Democratic Detonation will be available soon!  #helldivers2 #helldivers #gaming </content>
     <link href="https://tiktok.com/@superearthupdates/video/7354075653462871328"/>
     <published>2024-04-04T18:09:33+00:00</published>
+  </entry>
+  <entry>
+    <id>https://tiktok.com/@superearthupdates/video/7354095983287930145</id>
+    <title>Helldivers! New major orders, its time to remove the automatons once and for all!  #helldivers2 #helldivers #gaming #playstation </title>
+    <updated>2024-04-04T19:28:27+00:00</updated>
+    <content>Helldivers! New major orders, its time to remove the automatons once and for all!  #helldivers2 #helldivers #gaming #playstation </content>
+    <link href="https://tiktok.com/@superearthupdates/video/7354095983287930145"/>
+    <published>2024-04-04T19:28:27+00:00</published>
   </entry>
 </feed>
