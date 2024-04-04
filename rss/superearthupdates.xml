@@ -2,17 +2,9 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
   <id>https://www.tiktok.com/@superearthupdates</id>
   <title>superearthupdates TikTok</title>
-  <updated>2024-04-03T22:48:27+00:00</updated>
+  <updated>2024-04-04T18:09:33+00:00</updated>
   <link href="https://kell0x.github.io/tiktok-rss-flat/rss/superearthupdates.xml" rel="self"/>
   <generator uri="https://lkiesow.github.io/python-feedgen" version="1.0.0">python-feedgen</generator>
-  <entry>
-    <id>https://tiktok.com/@superearthupdates/video/7352566763663543584</id>
-    <title>Helldivers, lets talk about cyberstan. #helldivers2 #helldivers #gaming #playstation #joerogan </title>
-    <updated>2024-03-31T16:34:19+00:00</updated>
-    <content>Helldivers, lets talk about cyberstan. #helldivers2 #helldivers #gaming #playstation #joerogan </content>
-    <link href="https://tiktok.com/@superearthupdates/video/7352566763663543584"/>
-    <published>2024-03-31T16:34:19+00:00</published>
-  </entry>
   <entry>
     <id>https://tiktok.com/@superearthupdates/video/7352577867093429537</id>
     <title>Helldivers, stop heading to the creek, you will cost us our major orders. #helldivers2 #helldivers #gaming #playstation </title>
@@ -84,5 +76,13 @@
     <content>Helldivers, this is your update 4-3. Lots to cover so pay attention! #helldivers2 #helldivers #gaming </content>
     <link href="https://tiktok.com/@superearthupdates/video/7353776387267857696"/>
     <published>2024-04-03T22:48:27+00:00</published>
+  </entry>
+  <entry>
+    <id>https://tiktok.com/@superearthupdates/video/7354075653462871328</id>
+    <title>Helldivers, Democratic Detonation will be available soon!  #helldivers2 #helldivers #gaming </title>
+    <updated>2024-04-04T18:09:33+00:00</updated>
+    <content>Helldivers, Democratic Detonation will be available soon!  #helldivers2 #helldivers #gaming </content>
+    <link href="https://tiktok.com/@superearthupdates/video/7354075653462871328"/>
+    <published>2024-04-04T18:09:33+00:00</published>
   </entry>
 </feed>
