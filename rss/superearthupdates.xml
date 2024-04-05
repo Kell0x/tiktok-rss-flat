@@ -2,17 +2,9 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
   <id>https://www.tiktok.com/@superearthupdates</id>
   <title>superearthupdates TikTok</title>
-  <updated>2024-04-04T19:28:27+00:00</updated>
+  <updated>2024-04-05T14:38:03+00:00</updated>
   <link href="https://kell0x.github.io/tiktok-rss-flat/rss/superearthupdates.xml" rel="self"/>
   <generator uri="https://lkiesow.github.io/python-feedgen" version="1.0.0">python-feedgen</generator>
-  <entry>
-    <id>https://tiktok.com/@superearthupdates/video/7352674302061251872</id>
-    <title>Helldivers, are the automatons heading to cyberstan?  #helldivers2 #helldivers #gaming #playstation </title>
-    <updated>2024-03-31T23:31:43+00:00</updated>
-    <content>Helldivers, are the automatons heading to cyberstan?  #helldivers2 #helldivers #gaming #playstation </content>
-    <link href="https://tiktok.com/@superearthupdates/video/7352674302061251872"/>
-    <published>2024-03-31T23:31:43+00:00</published>
-  </entry>
   <entry>
     <id>https://tiktok.com/@superearthupdates/video/7352891994143837472</id>
     <title>Helldivers, Malevelon Creek must be taken. Its time. #helldivers2 #helldivers #gaming #playstation #arrowhead </title>
@@ -84,5 +76,13 @@
     <content>Helldivers! New major orders, its time to remove the automatons once and for all!  #helldivers2 #helldivers #gaming #playstation </content>
     <link href="https://tiktok.com/@superearthupdates/video/7354095983287930145"/>
     <published>2024-04-04T19:28:27+00:00</published>
+  </entry>
+  <entry>
+    <id>https://tiktok.com/@superearthupdates/video/7354392226966834464</id>
+    <title>&lt;&lt;&lt;SOS BROADCAST DETECTED&gt;&gt;&gt; ______________________________________#helldivers2 #helldivers #gaming #illuminate </title>
+    <updated>2024-04-05T14:38:03+00:00</updated>
+    <content>&lt;&lt;&lt;SOS BROADCAST DETECTED&gt;&gt;&gt; ______________________________________#helldivers2 #helldivers #gaming #illuminate </content>
+    <link href="https://tiktok.com/@superearthupdates/video/7354392226966834464"/>
+    <published>2024-04-05T14:38:03+00:00</published>
   </entry>
 </feed>
